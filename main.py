@@ -177,32 +177,33 @@ def sistema_locacao():
     st.table(usuarios_cadastrados)
 
     # Funções de aluguel e devolução de veículos disponíveis para todos os usuários
-    st.header("Alugar Veículo")
-    placa_alugar = st.selectbox("Escolha o veículo pela placa", [v['placa'] for v in dados['veiculos'] if v['disponivel']])
-    usuario_alugar = st.selectbox("Escolha o usuário", list(dados['usuarios'].keys()))
+    if st.session_state.usuario_atual == "admin":
+        st.header("Alugar Veículo")
+        placa_alugar = st.selectbox("Escolha o veículo pela placa", [v['placa'] for v in dados['veiculos'] if v['disponivel']])
+        usuario_alugar = st.selectbox("Escolha o usuário", list(dados['usuarios'].keys()))
 
-    if st.button("Alugar Veículo"):
-        for veiculo in dados['veiculos']:
-            if veiculo['placa'] == placa_alugar:
-                veiculo['disponivel'] = False
-                dados['alugueis'][placa_alugar] = usuario_alugar
-                salvar_dados(dados)
-                st.success(f"Veículo {placa_alugar} alugado para o usuário {usuario_alugar}")
-                break
-        st.rerun()
+        if st.button("Alugar Veículo"):
+            for veiculo in dados['veiculos']:
+                if veiculo['placa'] == placa_alugar:
+                    veiculo['disponivel'] = False
+                    dados['alugueis'][placa_alugar] = usuario_alugar
+                    salvar_dados(dados)
+                    st.success(f"Veículo {placa_alugar} alugado para o usuário {usuario_alugar}")
+                    break
+            st.rerun()
 
-    st.header("Devolver Veículo")
-    placa_devolver = st.selectbox("Escolha o veículo a ser devolvido", [v['placa'] for v in dados['veiculos'] if not v['disponivel']])
+        st.header("Devolver Veículo")
+        placa_devolver = st.selectbox("Escolha o veículo a ser devolvido", [v['placa'] for v in dados['veiculos'] if not v['disponivel']])
 
-    if st.button("Devolver Veículo"):
-        for veiculo in dados['veiculos']:
-            if veiculo['placa'] == placa_devolver:
-                veiculo['disponivel'] = True
-                del dados['alugueis'][placa_devolver]
-                salvar_dados(dados)
-                st.success(f"Veículo {placa_devolver} devolvido com sucesso!")
-                break
-        st.rerun()
+        if st.button("Devolver Veículo"):
+            for veiculo in dados['veiculos']:
+                if veiculo['placa'] == placa_devolver:
+                    veiculo['disponivel'] = True
+                    del dados['alugueis'][placa_devolver]
+                    salvar_dados(dados)
+                    st.success(f"Veículo {placa_devolver} devolvido com sucesso!")
+                    break
+            st.rerun()
 
     st.header("Veículos Alugados")
     veiculos_alugados = [v for v in dados['veiculos'] if not v['disponivel']]
