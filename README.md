@@ -68,7 +68,6 @@ O sistema utiliza um arquivo `locadora_dados.json` com a seguinte estrutura:
                 ],
                 "alugados": [
                     {
-                        // Mesma estrutura dos disponíveis +
                         "aluguel_atual": {
                             "cliente": "string",
                             "data_inicio": "date",
