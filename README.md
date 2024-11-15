@@ -132,8 +132,8 @@ O sistema utiliza um arquivo `locadora_dados.json` com a seguinte estrutura:
 ### Instalação
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/locadora-veiculos.git
-cd locadora-veiculos
+git clone https://github.com/Kayky-Azevedo/Locadora-de-carros.git
+cd Locadora-de-carros
 ```
 
 2. Crie e ative um ambiente virtual:
