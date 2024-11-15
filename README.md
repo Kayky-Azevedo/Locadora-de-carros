@@ -43,6 +43,26 @@ Sistema completo de gerenciamento para locadora de veículos desenvolvido em Pyt
   - Configuração de valor da diária
 - Sistema de devolução integrado
 
+## Acesso ao Sistema
+
+### Credenciais de Administrador
+- Usuário: `admin`
+- CPF: `admin123`
+
+### Níveis de Acesso
+
+#### Administrador
+- Acesso total ao sistema
+- Gerenciamento completo de veículos
+- Visualização de todos os usuários
+- Controle de locações e devoluções
+- Acesso ao painel administrativo
+
+#### Cliente
+- Visualização da frota disponível
+- Histórico pessoal de locações
+- Atualização de dados cadastrais
+
 ## Estrutura de Dados (JSON)
 O sistema utiliza um arquivo `locadora_dados.json` com a seguinte estrutura:
 
@@ -104,4 +124,31 @@ O sistema utiliza um arquivo `locadora_dados.json` com a seguinte estrutura:
 ```
 
 ## Requisitos e Instalação
-###
+### Requisitos
+- Python 3.x
+- Streamlit
+- Biblioteca JSON
+
+### Instalação
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/locadora-veiculos.git
+cd locadora-veiculos
+```
+
+2. Crie e ative um ambiente virtual:
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+```
+
+3. Instale as dependências:
+```bash
+pip install streamlit
+```
+
+4. Execute a aplicação:
+```bash
+streamlit run main.py
+```
