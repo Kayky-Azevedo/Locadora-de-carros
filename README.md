@@ -1,100 +1,108 @@
+# Sistema de Locadora de Veículos 🚗
 
-# Locadora de Veículos
+## Descrição
+Sistema completo de gerenciamento para locadora de veículos desenvolvido em Python com Streamlit. O sistema oferece controle total das operações de uma locadora, incluindo gestão de veículos, clientes, locações e devoluções.
 
-Este é um projeto simples de uma aplicação web para gerenciar uma locadora de veículos, permitindo o cadastro e a locação de veículos, bem como a administração de clientes e aluguéis. A interface foi construída usando o framework **Streamlit** e os dados são armazenados em um arquivo JSON.
+## Funcionalidades Principais
 
-## Funcionalidades
+### 🔐 Sistema de Autenticação
+- Login para usuários e administradores
+- Cadastro de novos usuários
+- Validação de credenciais
+- Controle de sessão
 
-  - **Login e Cadastro**: Usuários podem se cadastrar e fazer login utilizando nome de usuário e CPF.
-  - **Gestão de Veículos**: Administradores podem cadastrar, modificar e deletar veículos.
-  - **Aluguel e Devolução**: Usuários podem alugar e devolver veículos disponíveis.
-  - **Exibição de Dados**: Exibe tabelas com veículos disponíveis e usuários cadastrados.
-  - **Persistência de Dados**: Os dados são salvos em um arquivo JSON (`locadora_dados.json`), permitindo a persistência entre as sessões.
+### 👥 Gestão de Usuários
+- Cadastro completo de clientes com:
+  - Dados pessoais (nome, CPF)
+  - Informações de contato (telefone, email)
+  - Endereço completo (rua, número, cidade, estado)
+- Visualização de usuários cadastrados (acesso administrativo)
+- Separação entre clientes ativos e inativos
 
-## Requisitos
+### 🚙 Gestão de Veículos
+#### Funcionalidades Administrativas
+- Cadastro detalhado de veículos
+- Edição de informações dos veículos
+- Exclusão de veículos do sistema
+- Controle de:
+  - Marca e modelo
+  - Ano de fabricação
+  - Placa
+  - Categoria (econômico, intermediário, luxo)
+  - Detalhes técnicos (cor, combustível, quilometragem)
+  - Histórico de manutenções
 
-Para rodar a aplicação, você precisará ter os seguintes itens instalados:
+### 📋 Sistema de Locação
+- Visualização em tempo real de:
+  - Veículos disponíveis
+  - Veículos alugados
+- Processo completo de aluguel:
+  - Seleção de veículo por placa
+  - Seleção de cliente
+  - Definição de período (data início/devolução)
+  - Configuração de valor da diária
+- Sistema de devolução integrado
 
-- Python 3.8 ou superior
-- Bibliotecas Python:
-  - Streamlit
-  - json (nativo no Python)
-  - hashlib (nativo no Python)
+## Estrutura de Dados (JSON)
+O sistema utiliza um arquivo `locadora_dados.json` com a seguinte estrutura:
 
-## Instalação
-
-1. Clone este repositório para o seu ambiente local:
-
-   ```bash
-   git clone https://github.com/Kayky-Azevedo/Locadora-de-carros.git
-   cd Locadora-de-carros
-   ```
-
-2. Crie um ambiente virtual (opcional, mas recomendado):
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # No Windows, use: venv\Scripts\activate
-   ```
-
-3. Instale as dependências necessárias:
-
-   ```bash
-   pip install streamlit
-   ```
-
-4. Inicie a aplicação:
-
-   ```bash
-   streamlit run locadora_veiculos.py
-   ```
-## Estrutura do Código
-  O código é organizado da seguinte forma:
-
-  - `carregar_dados()`: Carrega dados de um arquivo JSON. Se o arquivo não existir, inicializa com dados padrão.
-  - `salvar_dados(dados)`: Salva os dados no arquivo JSON.
-  - `verificar_login(username, cpf)`: Verifica se o usuário e CPF estão corretos.
-  - `tela_login()`: Interface de login para usuários.
-  - `tela_cadastro()`: Interface para cadastro de novos usuários.
-  - `sistema_locacao()`: Sistema principal que gerencia a locação de veículos, disponível para usuários logados.
-
-## Estrutura do Arquivo JSON
- - O arquivo locadora_dados.json contém as seguintes estruturas de dados:
- ```
- {
-    "veiculos": [
-        {
-            "marca": "Marca do Veículo",
-            "modelo": "Modelo do Veículo",
-            "ano": 2023,
-            "placa": "ABC-1234",
-            "disponivel": true
-        }
-    ],
-    "clientes": [],
-    "alugueis": {
-        "ABC-1234": "Nome do Usuário"
-    },
-    "usuarios": {
-        "Nome do Usuário": {
-            "nome": "Nome Completo",
-            "cpf": "CPF do Usuário"
+```json
+{
+    "locadora": {
+        "frota": {
+            "carros": {
+                "disponiveis": [
+                    {
+                        "marca": "string",
+                        "modelo": "string",
+                        "ano": "number",
+                        "placa": "string",
+                        "categoria": "string",
+                        "detalhes": {
+                            "cor": "string",
+                            "combustivel": "string",
+                            "quilometragem": "number",
+                            "manutencoes": []
+                        }
+                    }
+                ],
+                "alugados": [
+                    {
+                        // Mesma estrutura dos disponíveis +
+                        "aluguel_atual": {
+                            "cliente": "string",
+                            "data_inicio": "date",
+                            "data_prevista_devolucao": "date",
+                            "valor_diaria": "number"
+                        }
+                    }
+                ]
+            }
+        },
+        "clientes": {
+            "ativos": {
+                "nome_usuario": {
+                    "dados_pessoais": {
+                        "nome_completo": "string",
+                        "cpf": "string",
+                        "contato": {
+                            "telefone": "string",
+                            "email": "string"
+                        },
+                        "endereco": {
+                            "rua": "string",
+                            "numero": "string",
+                            "cidade": "string",
+                            "estado": "string"
+                        }
+                    }
+                }
+            },
+            "inativos": {}
         }
     }
-  }
-  ```
+}
+```
 
-## Estrutura do Projeto
-
-- **locadora_dados.json**: Armazena os dados da locadora, incluindo veículos, usuários e aluguéis.
-- **main.py**: Código principal da aplicação, responsável pelas interfaces de login, cadastro e gerenciamento de veículos e aluguéis.
-
-## Como Usar
-
-1. Ao iniciar a aplicação, você será direcionado para a tela de login.
-2. Caso não tenha uma conta, clique em "Ir para Cadastro" para criar uma nova.
-3. Após o login, você terá acesso ao sistema de locação, onde poderá alugar e devolver o veiculo.
-
-## Contribuições
-
-Contribuições são bem-vindas! Sinta-se à vontade para fazer um fork deste repositório e enviar um pull request com suas melhorias.
+## Requisitos e Instalação
+###

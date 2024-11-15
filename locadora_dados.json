@@ -1,0 +1,51 @@
+{
+    "locadora": {
+        "frota": {
+            "carros": {
+                "disponiveis": [],
+                "alugados": [
+                    {
+                        "marca": "Ford",
+                        "modelo": "Fiesta",
+                        "ano": 2024,
+                        "placa": "abc123",
+                        "categoria": "economico",
+                        "detalhes": {
+                            "cor": "Azul",
+                            "combustivel": "diesel",
+                            "quilometragem": 142000,
+                            "manutencoes": []
+                        },
+                        "aluguel_atual": {
+                            "cliente": "Vitor",
+                            "data_inicio": "2024-11-15",
+                            "data_prevista_devolucao": "2024-11-15",
+                            "valor_diaria": 123.0
+                        }
+                    }
+                ]
+            }
+        },
+        "clientes": {
+            "ativos": {
+                "Vitor": {
+                    "dados_pessoais": {
+                        "nome_completo": "Vitor",
+                        "cpf": "52891871898",
+                        "contato": {
+                            "telefone": "19998983446",
+                            "email": "valavezzo@gmail.com"
+                        },
+                        "endereco": {
+                            "rua": "Angelo Candido",
+                            "numero": "236",
+                            "cidade": "Leme",
+                            "estado": ""
+                        }
+                    }
+                }
+            },
+            "inativos": {}
+        }
+    }
+}
