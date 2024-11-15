@@ -11,7 +11,7 @@ def carregar_dados():
                 dados["usuarios"] = {}
             return dados
     except FileNotFoundError:
-        return {"veiculos": [], "clientes": [], "alugueis": {}, "usuarios": {}}
+        return {"veiculos": [], "alugueis": {}, "usuarios": {}}
 
 def salvar_dados(dados):
     with open('locadora_dados.json', 'w') as f:
@@ -19,14 +19,13 @@ def salvar_dados(dados):
 
 dados = carregar_dados()
 
-# Função para hash da senha (mesmo que não seja usada, mantemos aqui para futuros ajustes)
 def verificar_login(username, cpf):
     # Login padrão para o administrador
     if username == "admin" and cpf == "admin123":
         return True
     if username in dados["usuarios"]:
         if dados["usuarios"][username]["cpf"] == cpf:
-            return True  # Usuário normal logando com CPF
+            return True
     return False
 
 # Função para exibir a tela de login
@@ -41,7 +40,7 @@ def tela_login():
             st.session_state.usuario_atual = username
             st.session_state.tela = "principal"
             st.success("Login realizado com sucesso!")
-            st.rerun()  # Simular rerun
+            st.rerun()
         else:
             st.error("Usuário ou CPF inválidos!")
 
